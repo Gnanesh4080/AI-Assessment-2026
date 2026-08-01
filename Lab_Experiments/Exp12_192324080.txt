@@ -1,0 +1,62 @@
+# Tic Tac Toe Game
+board = [[' ' for _ in range(3)] for _ in range(3)]
+# Function to display the board
+def display():
+for row in board:
+print(" | ".join(row)) 
+print("-" * 9)
+# Function to check winnerdef check_winner(player):
+# Check rows
+for row in board:
+if all(cell == player for cell in row):
+return True
+# Check columns
+for col in range(3):
+        if all(board[row][col] == player for row in range(3)):  
+return True
+# Check diagonals
+ if all(board[i][i] == player for i in range(3)):
+        return True
+    if all(board[i][2 - i] == player for i in range(3)):
+        return True
+    return False
+# Function to check draw
+def is_draw():
+    for row in board:
+        if ' ' in row:
+            return False
+    return True
+# Main game loop
+player = 'X'
+while True:
+    display()
+    row = int(input(f"Player {player}, Enter row (0-2): "))
+    col = int(input(f"Player {player}, Enter column (0-2): "))
+    if board[row][col] == ' ':
+        board[row][col] = player
+        if check_winner(player):
+            display()
+            print(f"Player {player} Wins!")
+            break
+        if is_draw():
+            display()
+            print("Game Draw!")
+            break
+        player = 'O' if player == 'X' else 'X'
+    else:
+        print("Cell already occupied! Try again.")
+
+Sample Input : Player X, Enter row (0-2): 0
+Player X, Enter column (0-2): 0
+
+Player O, Enter row (0-2): 1
+Player O, Enter column (0-2): 1
+
+Player X, Enter row (0-2): 0
+Player X, Enter column (0-2): 1
+
+Player O, Enter row (0-2): 2
+Player O, Enter column (0-2): 2
+
+Player X, Enter row (0-2): 0
+Player X, Enter column (0-2): 2
